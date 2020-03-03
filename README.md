@@ -6,6 +6,8 @@ taokei
 
 ## Links Úteis (colocar aqui)
 https://medium.com/@ismailakkila/black-hat-python-encrypt-and-decrypt-with-rsa-cryptography-bd6df84d65bc
+https://www.0xkasper.com/articles/hacktm-ctf-2020-qualifiers-write-up#rsa-is-easy-1
+https://gist.github.com/JonCooperWorks/5314103#
 
 ## Trabalho Criptografia Assimétrica
 
