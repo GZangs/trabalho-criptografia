@@ -10,25 +10,24 @@ namespace trabalho_criptografia
         static string ORIGINAL_FILE_NAME = "originalFile.txt";
         static string ENCRYPTED_FILE_NAME = "encryptedData.crypt";
 
+        // Create an instance of the RSA algorithm class  
+        static RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+
         public static void Execute(int mode)
         {
-            // Create an instance of the RSA algorithm class  
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            string publicKey = rsa.ToXmlString(false); // false to get the public key
+            string privateKey = rsa.ToXmlString(true); // true to get the private key   
 
             if (mode == 1)
             {
-                // Get the public key
-                string publicKey = rsa.ToXmlString(false); // false to get the public key
-
+                Console.WriteLine("Conteúdo do arquivo original: {0}", File.ReadAllText(ORIGINAL_FILE_NAME));
                 // Call the encryptText method   
-                EncryptFile(publicKey, ORIGINAL_FILE_NAME, ENCRYPTED_FILE_NAME);
+                EncryptFile(publicKey);
             }
             else if (mode == 2)
             {
-                string privateKey = rsa.ToXmlString(true); // true to get the private key   
-
                 // Call the decryptData method and print the result on the screen   
-                Console.WriteLine("Conteúdo Descriptografado: {0}", DecryptFile(privateKey, ENCRYPTED_FILE_NAME));
+                Console.WriteLine("Conteúdo descriptografado: {0}", DecryptFile(privateKey));
             }
             else {
                 throw new Exception("Opção informada não existe.");
@@ -38,12 +37,11 @@ namespace trabalho_criptografia
         /// <summary>
         /// Create a method to encrypt a text and save it to a specific file using a RSA algorithm public key   
         /// </summary>
-        private static void EncryptFile(string publicKey, string originalFile, string encryptedFile)
+        private static void EncryptFile(string publicKey)
         {
             // Convert the text to an array of bytes   
-            UnicodeEncoding byteConverter = new UnicodeEncoding();
-            byte[] dataToEncrypt = File.ReadAllBytes(originalFile);
-
+            byte[] dataToEncrypt = Encoding.UTF8.GetBytes(File.ReadAllText(ORIGINAL_FILE_NAME));  
+            
             // Create a byte array to store the encrypted data in it   
             byte[] encryptedData;
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
@@ -52,21 +50,22 @@ namespace trabalho_criptografia
                 rsa.FromXmlString(publicKey);
 
                 // Encrypt the data and store it in the encyptedData Array   
-                encryptedData = rsa.Encrypt(dataToEncrypt, false);
+                encryptedData = rsa.Encrypt(dataToEncrypt, true);
             }
             // Save the encypted data array into a file   
-            File.WriteAllBytes(encryptedFile, encryptedData);
+            File.WriteAllBytes(ENCRYPTED_FILE_NAME, encryptedData);
 
+            Console.WriteLine("");
             Console.WriteLine("O arquivo foi criptografado -> {0}\\{1}", Directory.GetCurrentDirectory(), ENCRYPTED_FILE_NAME);
         }
 
         /// <summary>
         /// Method to decrypt the data withing a specific file using a RSA algorithm private key   
         /// </summary>
-        private static string DecryptFile(string privateKey, string encryptedFile)
+        private static string DecryptFile(string privateKey)
         {
             // read the encrypted bytes from the file   
-            byte[] dataToDecrypt = File.ReadAllBytes(encryptedFile);
+            byte[] dataToDecrypt = File.ReadAllBytes(ENCRYPTED_FILE_NAME);
 
             // Create an array to store the decrypted data in it   
             byte[] decryptedData;
@@ -78,8 +77,7 @@ namespace trabalho_criptografia
             }
 
             // Get the string value from the decryptedData byte array   
-            UnicodeEncoding byteConverter = new UnicodeEncoding();
-            return byteConverter.GetString(decryptedData);
+            return Encoding.UTF8.GetString(decryptedData);
         }
     }
 }
