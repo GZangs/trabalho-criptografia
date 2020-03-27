@@ -1,13 +1,6 @@
 # trabalho-criptografia
 Trabalho da disciplina de Segurança e Auditoria de Sistemas de Segurança
-
-## Tem que enviar o link do repo pro martim.dietterle@catolicasc.org.br
-taokei
-
-## Links Úteis (colocar aqui)
-https://medium.com/@ismailakkila/black-hat-python-encrypt-and-decrypt-with-rsa-cryptography-bd6df84d65bc
-https://www.0xkasper.com/articles/hacktm-ctf-2020-qualifiers-write-up#rsa-is-easy-1
-https://gist.github.com/JonCooperWorks/5314103#
+Enviar o link do repo pro martim.dietterle@catolicasc.org.br
 
 ## Trabalho Criptografia Assimétrica
 
