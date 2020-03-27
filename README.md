@@ -1,7 +1,11 @@
 # trabalho-criptografia
-Trabalho da disciplina de Segurança e Auditoria de Sistemas de Segurança
+- Trabalho da disciplina de Segurança e Auditoria de Sistemas de Segurança
+- Integrantes: Gabriel Zanghelini e Jeferson Guesser
+- Enviar o link do repo pro martim.dietterle@catolicasc.org.br
 
-Enviar o link do repo pro martim.dietterle@catolicasc.org.br
+## Como rodar o programa?
+- Fazer clone do repositório;
+- Executar o arquivo trabalho-criptografia.exe que está dentro da pasta /bin/Debug/netcoreapp3.1/publish
 
 ## Trabalho Criptografia Assimétrica
 
